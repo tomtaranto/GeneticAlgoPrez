@@ -76,6 +76,7 @@ def mutation(children: List[CoffeeParameters], mutation_rate: float = 0.1) -> Li
 def replacement(parents: List[CoffeeParameters], children: List[CoffeeParameters]) -> List[CoffeeParameters]:
     return parents + children
 
+
 def __log_best_parameters(population):
     best_coffee_parameters = max(population, key=lambda x: score(x))
     print(f'Best coffee can be made with the following parameters:'
@@ -98,20 +99,22 @@ def validate_parameters(iteration, population_size, selection_function):
         raise ValueError('Unknown selection function')
 
 
+def evolve_population(iteration, population, selection_function):
+    scores = evaluate_population(population)
+    print(f'Iteration {iteration}: {max(scores)}')
+    parents = selection(population, scores, selection_function)
+    children = crossover(parents)
+    children = mutation(children, mutation_rate=0.1)
+    population = replacement(parents, children)
+    return population
+
+
 def genetic_algo(iteration: int = 5, population_size: int = 100, selection_function: str = 'rank'):
     validate_parameters(iteration, population_size, selection_function)
     population: List[CoffeeParameters] = generate_initial_population(population_size)
     for iteration in range(iteration):
-        scores = evaluate_population(population)
-        print(f'Iteration {iteration}: {max(scores)}')
-        parents = selection(population, scores, selection_function)
-        children = crossover(parents)
-        children = mutation(children, mutation_rate=0.1)
-        population = replacement(parents, children)
+        population = evolve_population(iteration, population, selection_function)
     __log_best_parameters(population)
-
-
-
 
 
 def main():
