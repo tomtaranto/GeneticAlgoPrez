@@ -1,3 +1,5 @@
+package com.ekinox.geneticalgo;
+
 import java.util.Random;
 
 public class CoffeeParameters {

@@ -1,3 +1,5 @@
+package com.ekinox.geneticalgo;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,8 +45,7 @@ public class Main {
         List<CoffeeParameters> parents = selection(population, selectionFunction);
         List<CoffeeParameters> children = crossover(parents);
         List<CoffeeParameters> mutatedChildren = mutation(children, 0.1);
-        population = replacement(parents, mutatedChildren);
-        return population;
+        return replacement(parents, mutatedChildren);
     }
 
     private static List<CoffeeParameters> replacement(List<CoffeeParameters> parents, List<CoffeeParameters> children) {

@@ -1,3 +1,5 @@
+import com.ekinox.geneticalgo.CoffeeParameters;
+import com.ekinox.geneticalgo.Main;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

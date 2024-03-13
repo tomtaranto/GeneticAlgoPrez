@@ -9,48 +9,96 @@
 
 ## Présentation
 
-Ce projet est une présentation de l'algorithme génétique. Il a été réalisé dans le cadre des journées de partage d'[Ekinox](www.ekinox.io).
+Ce projet est une présentation de l'algorithme génétique. Il a été réalisé dans le cadre des journées de partage
+d'[Ekinox](www.ekinox.io).
+
+Il permet de trouver les parametres optimaux pour avoir le meilleur café possible.
 
 ## Installation
 
-### [Colab](https://colab.research.google.com/)
+### Python
 
-On peut suivre [ce lien](https://colab.research.google.com/github/tomtaranto/GeneticAlgoPrez/blob/main/GeneticAlgoHandsOn.ipynb) pour y acceder directement
-
-OU
-
-On peut recuperer le notebook stocké sur github directement depuis Colab:
-
-```
-Fichier > Importer un notebook > Github > L'url de ce repo (https://github.com/tomtaranto/GeneticAlgoPrez) > selectionner le notebook
-```
-
-On peut ensuiter executer les cellules unes à unes.
-
-
-### Local
- 
-Pour installer le projet en local. Il faut installer les dependances python
+Se rendre dans le dossier python
 
 ```bash
-poetry install
+  cd python
 ```
 
-On peut ensuite lancer l'algo avec la commande
+Installer les dépendances
 
 ```bash
-poetry run python main.py
+  poetry install
 ```
 
+Lancer les tests
+
+```bash
+  poetry run pytest
+```
+
+Lancer le projet
+
+```bash
+  poetry run python main.py
+```
+
+### Java
+
+Se rendre dans le dossier java
+
+```bash
+  cd java
+```
+
+Installer les dépendances
+
+```bash
+  mvn clean install
+```
+
+Lancer les tests
+
+```bash
+  mvn test
+```
+
+Lancer le projet
+```bash
+  mvn exec:java -Dexec.mainClass="com.ekinox.geneticalgo.Main"
+```
+
+
+## Typescript
+
+Se rendre dans le dossier typescript
+
+```bash
+  cd typescript
+```
+
+Installer les dépendances
+
+```bash
+  npm install
+```
+
+Lancer les tests
+
+```bash
+  npm test
+```
+
+Lancer le projet
+
+```bash
+  npm start
+```
 
 ## Utilisation
 
 Un premier algorithme est déjà implémenté.
 
-On peut essayer de modifier les constantes définies en début du fichier pour voir leur impact sur les résultats obtenus.
-
-A la fin de chaque execution, on obtient un GIF qui montre le meilleur individu de chaque génération.
-
+Le but du hands-on est de modifier l'algo.
 
 ## Hands-On
 
@@ -68,10 +116,10 @@ La convergence vers une solution est plus rapide lorsque la population est grand
 La convergence vers une solution est plus rapide lorsque la mutation est dans l'intervalle [0.1, 0.9]
 </details>
 
-
 ### 3. Modifier la variable `NEW_ELEMENTS_EACH_GENERATION`
 
-Utiliser le dataset `"paris_metro"` pour tester l'impact de cette variable. Partir de 0 et augmenter petit à petit le nombre.
+Utiliser le dataset `"paris_metro"` pour tester l'impact de cette variable. Partir de 0 et augmenter petit à petit le
+nombre.
 
 <details>
 <summary>Résultats attendus</summary>
