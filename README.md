@@ -120,20 +120,14 @@ Un taux trop fort de mutation peut empecher la convergence.
 ### 3. Implementer La fonction de selection `roulette`
 
 Ici, chaque individu a une probabilité d'être séléctionné proportionnelle à son score
-
-<details>
-<summary>Implémentation</summary>
-TODO
-</details>
+Plus un individu a un score élevé, plus il a de chance d'être séléctionné. Chaque individu a une chance non nulle d'être selectionné.
 
 ### 4. Implementer La fonction de selection `tournament`
 
-Ici, chaque individu a une probabilité d'être séléctionné proportionnelle à son score
+Ici, on va tirer au sort plusieurs individus et on va selectionner parmis ceux là ceux qui on le meilleur score.
 
-<details>
-<summary>Implémentation</summary>
-TODO
-</details>
+[Lien Wikipedia](https://en.wikipedia.org/wiki/Tournament_selection)
+
 
 
 
