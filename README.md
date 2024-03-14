@@ -102,31 +102,22 @@ Le but du hands-on est de modifier l'algo.
 
 ## Hands-On
 
-### 1. Modifier la variable `POPULATION_SIZE`
+### 1. Modifier la taille de la population
 
 <details>
 <summary>Résultats attendus</summary>
 La convergence vers une solution est plus rapide lorsque la population est grande
 </details>
 
-### 2. Modifier la variable `MUTATION_RATE`
+### 2. Modifier le taux de mutation
 
 <details>
 <summary>Résultats attendus</summary>
-La convergence vers une solution est plus rapide lorsque la mutation est dans l'intervalle [0.1, 0.9]
+Un taux moyen de mutation permet d'avoir des resultats plus rapidement.
+Un taux trop fort de mutation peut empecher la convergence.
 </details>
 
-### 3. Modifier la variable `NEW_ELEMENTS_EACH_GENERATION`
-
-Utiliser le dataset `"paris_metro"` pour tester l'impact de cette variable. Partir de 0 et augmenter petit à petit le
-nombre.
-
-<details>
-<summary>Résultats attendus</summary>
-L'apparition de nouveaux éléments permet de ne pas rester coincé sur les minimas locaux. Attention, un trop grand nombre de nouveaux éléments peut ralentir fortement la convergence.
-</details>
-
-### 4. Implementer La fonction de selection `roulette`
+### 3. Implementer La fonction de selection `roulette`
 
 Ici, chaque individu a une probabilité d'être séléctionné proportionnelle à son score
 
