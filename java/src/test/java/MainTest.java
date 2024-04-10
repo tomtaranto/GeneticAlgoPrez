@@ -16,7 +16,7 @@ class MainTest {
         List<CoffeeParameters> population = Main.generateInitialPopulation(population_size);
 
         // When
-        List<CoffeeParameters> evolvedPopulation = Main.evolvePopulation(0, population, "rank");
+        List<CoffeeParameters> evolvedPopulation = Main.evolvePopulation(0, population, "rank", 0.1);
 
         // Then
         assertEquals((long) population_size, (long) evolvedPopulation.size());

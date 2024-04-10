@@ -72,21 +72,21 @@ function clamp(value: number): number {
     return Math.max(10, Math.min(0, value))
 }
 
-function mutation(children: CoffeeParameters[]) {
+function mutation(children: CoffeeParameters[], mutation_rate: number) {
     children.forEach((child) => {
-        if (Math.random() < 0.1) {
+        if (Math.random() < mutation_rate) {
             child.waterHardness = clamp(child.waterHardness + Math.random() * 2 - 1)
         }
-        if (Math.random() < 0.1) {
+        if (Math.random() < mutation_rate) {
             child.grainGrinding = clamp(child.grainGrinding + Math.random() * 2 - 1)
         }
-        if (Math.random() < 0.1) {
+        if (Math.random() < mutation_rate) {
             child.waterTemperature = clamp(child.waterTemperature + Math.random() * 2 - 1)
         }
-        if (Math.random() < 0.1) {
+        if (Math.random() < mutation_rate) {
             child.coffeeDose = clamp(child.coffeeDose + Math.random() * 2 - 1)
         }
-        if (Math.random() < 0.1) {
+        if (Math.random() < mutation_rate) {
             child.tastingAltitude = clamp(child.tastingAltitude + Math.random() * 2 - 1)
         }
     })
@@ -97,26 +97,29 @@ function replacement(population: CoffeeParameters[], mutatedChildren: CoffeePara
     return population.concat(mutatedChildren)
 }
 
-export function evolvePopulation(iteration: number, population: CoffeeParameters[], selection_function: string): CoffeeParameters[] {
+export function evolvePopulation(iteration: number, population: CoffeeParameters[], selection_function: string, mutation_rate:number): CoffeeParameters[] {
     evaluatePopulation(population)
     console.log(`Iteration ${iteration} : ${CoffeeScorer.findBestCoffeeParameters(population)?.score}`);
     const parents = selection(population, selection_function)
     const children = crossover(parents)
-    const mutatedChildren = mutation(children)
+    const mutatedChildren = mutation(children, mutation_rate)
     return replacement(parents, mutatedChildren)
 }
 
-function geneticAlgo(iterations: number = 5, populationSize: number = 100, selection_function: string = 'rank') {
+function geneticAlgo(iterations: number = 5, populationSize: number = 100, selection_function: string = 'rank', mutationRate: number = 0.1) {
     validateParameters(iterations, populationSize, selection_function)
     let population: CoffeeParameters[] = generatePopulation(populationSize)
     for (let iteration = 0; iteration < iterations; iteration++) {
-        population = evolvePopulation(iteration, population, selection_function)
+        population = evolvePopulation(iteration, population, selection_function, mutationRate)
     }
 
 }
 
 function main() {
-    geneticAlgo(100, 120)
+    const POPULATION_SIZE = 100
+    const MUTATION_RATE = 0.1
+    const SELECTION_FUNCTION = 'rank'
+    geneticAlgo(100, POPULATION_SIZE, SELECTION_FUNCTION, MUTATION_RATE)
 }
 
 

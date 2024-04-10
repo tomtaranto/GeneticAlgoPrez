@@ -77,7 +77,7 @@ def replacement(parents: List[CoffeeParameters], children: List[CoffeeParameters
     return parents + children
 
 
-def __log_best_parameters(population):
+def __log_best_parameters(population: List[CoffeeParameters]):
     best_coffee_parameters = max(population, key=lambda x: score(x))
     print(f'Best coffee can be made with the following parameters:'
           f'\nWater hardness: {best_coffee_parameters.water_hardness}'
@@ -88,7 +88,7 @@ def __log_best_parameters(population):
           f'\nScore: {score(best_coffee_parameters)}')
 
 
-def validate_parameters(iteration, population_size, selection_function):
+def validate_parameters(iteration: int, population_size: int, selection_function: str):
     if iteration < 1:
         raise ValueError('Iteration must be greater than 0')
     if population_size < 1:
@@ -99,26 +99,31 @@ def validate_parameters(iteration, population_size, selection_function):
         raise ValueError('Unknown selection function')
 
 
-def evolve_population(iteration, population, selection_function):
+def evolve_population(iteration: int, population: List[CoffeeParameters], selection_function: str,
+                      mutation_rate: float):
     scores = evaluate_population(population)
     print(f'Iteration {iteration}: {max(scores)}')
     parents = selection(population, scores, selection_function)
     children = crossover(parents)
-    children = mutation(children, mutation_rate=0.1)
+    children = mutation(children, mutation_rate=mutation_rate)
     population = replacement(parents, children)
     return population
 
 
-def genetic_algo(iteration: int = 5, population_size: int = 100, selection_function: str = 'rank'):
+def genetic_algo(iteration: int = 5, population_size: int = 100, selection_function: str = 'rank',
+                 mutation_rate: float = 0.1):
     validate_parameters(iteration, population_size, selection_function)
     population: List[CoffeeParameters] = generate_initial_population(population_size)
     for iteration in range(iteration):
-        population = evolve_population(iteration, population, selection_function)
+        population = evolve_population(iteration, population, selection_function, mutation_rate)
     __log_best_parameters(population)
 
 
 def main():
-    genetic_algo(100, 120)
+    POPULATION_SIZE = 120
+    MUTATION_RATE = 0.1
+    SELECTION_FUNCTION = 'rank'
+    genetic_algo(100, POPULATION_SIZE, SELECTION_FUNCTION, MUTATION_RATE)
 
 
 if __name__ == '__main__':

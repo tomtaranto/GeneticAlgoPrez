@@ -9,11 +9,11 @@ import java.util.stream.Stream;
 
 public class Main {
 
-    public static void genetic_algo(Integer iterations, Integer populationSize, String selectionFunction) {
+    public static void genetic_algo(Integer iterations, Integer populationSize, String selectionFunction, double mutationRate) {
         validateParameters(iterations, populationSize, selectionFunction);
         List<CoffeeParameters> population = generateInitialPopulation(populationSize);
         for (Integer iteration = 0; iteration < iterations; iteration++) {
-            population = evolvePopulation(iteration, population, selectionFunction);
+            population = evolvePopulation(iteration, population, selectionFunction, mutationRate);
         }
         logBestParameters(population);
     }
@@ -39,12 +39,12 @@ public class Main {
                            + "\nScore: " + CoffeeScorer.score(bestCoffeeParameters));
     }
 
-    public static List<CoffeeParameters> evolvePopulation(Integer iteration, List<CoffeeParameters> population, String selectionFunction) {
+    public static List<CoffeeParameters> evolvePopulation(Integer iteration, List<CoffeeParameters> population, String selectionFunction, double mutationRate) {
         population.forEach(p -> p.setScore(CoffeeScorer.score(p)));
         System.out.println("Iteration " + iteration + ": " + population.stream().map(p -> p.score).max(Double::compare).orElse(0.0));
         List<CoffeeParameters> parents = selection(population, selectionFunction);
         List<CoffeeParameters> children = crossover(parents);
-        List<CoffeeParameters> mutatedChildren = mutation(children, 0.1);
+        List<CoffeeParameters> mutatedChildren = mutation(children, mutationRate);
         return replacement(parents, mutatedChildren);
     }
 
@@ -135,6 +135,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        genetic_algo(100, 120, "rank");
+        double MUTATION_RATE = 0.1;
+        int POPULATION_SIZE = 120;
+        String SELECTION_FUNCTION = "rank";
+        genetic_algo(100, POPULATION_SIZE, SELECTION_FUNCTION, MUTATION_RATE);
     }
 }
